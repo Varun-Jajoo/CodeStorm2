@@ -6,6 +6,7 @@ import {
   View,
   FlatList,
   Pressable,
+  Image,
 } from "react-native";
 import {
   addDoc,
@@ -139,6 +140,18 @@ const Chat = (props) => {
             >
               Send
             </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              // Implement image upload functionality here
+              console.log("Upload image button pressed");
+            }}
+            style={{ position: "absolute", top: 0, right: 80 }}
+          >
+            <Image
+              source={require("../assets/imageUpload.png")}
+              style={{ width: 24, height: 24, padding: 10 }}
+            />
           </TouchableOpacity>
         </View>
       </Pressable>

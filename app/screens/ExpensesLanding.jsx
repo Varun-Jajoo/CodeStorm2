@@ -340,7 +340,7 @@ const Expenses = () => {
             top: Platform.OS === "android" ? 127 : 105,
             right: "45%",
             fontSize: 80,
-            color: "#F1C93B",
+            color: "#5356FF",
             fontWeight: "bold",
           }}
         >

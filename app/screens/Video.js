@@ -1,70 +1,51 @@
-import React, {
-  useEffect,
-  useContext,
-  useCallback,
-  useRef,
-  useState,
-} from "react";
+import React, { useEffect, useContext, useCallback, useState } from "react";
 import { StyleSheet, Text, View, SafeAreaView, ScrollView } from "react-native";
-import { Button, Alert } from "react-native";
+import { Alert } from "react-native";
 import YoutubePlayer from "react-native-youtube-iframe";
 import { UserContext } from "../App";
+import { LinearGradient } from "expo-linear-gradient";
 
 const Video = () => {
-  const { userData, setUserData } = useContext(UserContext);
+  const { userData } = useContext(UserContext);
   const [playing, setPlaying] = useState(false);
   const vid = ["AIOR1x7fPcQ", "OJGUYYUPH_0", "W4hcZe79qS0"];
 
   const onStateChange = useCallback((state) => {
     if (state === "ended") {
       setPlaying(false);
-      Alert.alert("video has finished playing!");
+      Alert.alert("Video has finished playing!");
     }
   }, []);
 
-  const togglePlaying = useCallback(() => {
-    setPlaying((prev) => !prev);
-  }, []);
-  console.log(userData.wrongQuestionId);
   return (
-    <SafeAreaView
-      style={{
-        flexDirection: "column",
-        alignItems: "center",
-      }}
-    >
-      <View style={{ paddingHorizontal: 20 }}>
-        <Text style={{ textAlign: "center", fontSize: 30, fontWeight: 700 }}>
-          Video Tutorials
+    <SafeAreaView style={styles.container}>
+      <LinearGradient
+        colors={["#3FA2F6", "#7CF5FF"]}
+        style={styles.gradientHeader}
+      >
+        <Text style={styles.headerText}>Video Tutorials</Text>
+      </LinearGradient>
+      <View style={styles.content}>
+        <Text style={styles.subHeaderText}>
+          Improve your knowledge by learning from your previous mistakes
         </Text>
-        <Text
-          style={{
-            textAlign: "center",
-            fontSize: 15,
-            paddingTop: 20,
-            paddingBottom: 20,
-          }}
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={styles.scrollContent}
         >
-          Imporove you knowledge by learning the things that went wrong during
-          previous Level
-        </Text>
-        <ScrollView showsVerticalScrollIndicator={false}>
           {userData.wrongQuestion.map((ques, id) => (
-            <View key={id}>
-              <Text style={{ paddingBottom: 20, fontSize: 20 }}>
-                {id + 1}. {ques} ?
+            <View key={id} style={styles.questionContainer}>
+              <Text style={styles.questionText}>
+                {id + 1}. {ques}?
               </Text>
-              <View style={{ borderRadius: 10 }}>
+              <View style={styles.videoContainer}>
                 <YoutubePlayer
-                  height={250}
+                  style={{ borderRadius: 10 }}
+                  height={200}
                   play={playing}
                   videoId={vid[id]}
                   onChangeState={onStateChange}
                 />
-                {/* <Button
-                  title={playing ? "pause" : "play"}
-                  onPress={togglePlaying}
-                /> */}
               </View>
             </View>
           ))}
@@ -76,4 +57,59 @@ const Video = () => {
 
 export default Video;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#EEF7FF",
+  },
+  gradientHeader: {
+    height: 150,
+    justifyContent: "flex-end",
+    paddingBottom: 40,
+  },
+  headerText: {
+    textAlign: "center",
+    fontSize: 40,
+    fontWeight: "bold",
+    color: "#023e8a",
+  },
+  content: {
+    flex: 1,
+    backgroundColor: "#EEF7FF",
+    borderTopLeftRadius: 30,
+    borderTopRightRadius: 30,
+    marginTop: -30,
+    paddingHorizontal: 20,
+    paddingTop: 30,
+  },
+  subHeaderText: {
+    textAlign: "center",
+    fontSize: 16,
+    color: "#023e8a",
+    marginBottom: 20,
+  },
+  scrollContent: {
+    paddingBottom: 30,
+  },
+  questionContainer: {
+    marginBottom: 30,
+    backgroundColor: "#FFFFFF",
+    borderRadius: 15,
+    padding: 15,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 3,
+  },
+  questionText: {
+    fontSize: 18,
+    fontWeight: "600",
+    color: "#00b4d8",
+    marginBottom: 15,
+  },
+  videoContainer: {
+    borderRadius: 10,
+    overflow: "hidden",
+  },
+});

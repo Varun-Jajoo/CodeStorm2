@@ -12,6 +12,7 @@ import {
   Platform,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import { LinearGradient } from "expo-linear-gradient";
 
 const ZeroBalanceAccount = () => {
   const navigation = useNavigation();
@@ -22,6 +23,8 @@ const ZeroBalanceAccount = () => {
         paddingTop: Platform.OS === "android" ? 40 : 0,
         justifyContent: "center",
         alignItems: "center",
+        height: "100%",
+        backgroundColor: "#EEF7FF",
       }}
     >
       <ScrollView style={{ display: "flex" }}>
@@ -73,7 +76,7 @@ const ZeroBalanceAccount = () => {
               <Pressable
                 onPress={() => navigation.navigate("Zero")}
                 style={{
-                  backgroundColor: "#FFB6C1", // Pastel pink
+                  backgroundColor: "#4cc9f0", // Light blue
                   height: 200,
                   width: 170,
                   borderRadius: 20,
@@ -106,7 +109,7 @@ const ZeroBalanceAccount = () => {
               <Pressable
                 onPress={() => navigation.navigate("Scheme")}
                 style={{
-                  backgroundColor: "#FFD700", // Pastel yellow
+                  backgroundColor: "#0096c7", // Deep blue
                   height: 200,
                   width: 170,
                   borderRadius: 20,
@@ -117,15 +120,15 @@ const ZeroBalanceAccount = () => {
                   style={{ width: 40, height: 40, margin: 10 }}
                 />
                 <Text
-                  style={{ color: "brown", marginLeft: 10, fontWeight: "600" }}
+                  style={{ color: "white", marginLeft: 10, fontWeight: "600" }}
                 >
                   Online Application
                 </Text>
                 <Text
                   style={{
-                    color: "brown",
+                    color: "white",
                     margin: 10,
-                    opacity: 0.5,
+                    opacity: 0.7,
                     fontSize: 12,
                   }}
                 >
@@ -135,7 +138,7 @@ const ZeroBalanceAccount = () => {
               <Pressable
                 onPress={() => navigation.navigate("Savings")}
                 style={{
-                  backgroundColor: "#98FB98", // Pastel green
+                  backgroundColor: "#90e0ef", // Light cyan
                   height: 200,
                   width: 170,
                   borderRadius: 20,
@@ -167,7 +170,7 @@ const ZeroBalanceAccount = () => {
               </Pressable>
               <View
                 style={{
-                  backgroundColor: "#AFEEEE", // Pastel blue
+                  backgroundColor: "#a2d2ff", // Light blue
                   height: 200,
                   width: 170,
                   borderRadius: 20,
@@ -177,10 +180,23 @@ const ZeroBalanceAccount = () => {
                   source={require("../assets/bank.png")}
                   style={{ width: 40, height: 40, margin: 10 }}
                 />
-                <Text style={{ marginLeft: 10, fontWeight: "600" }}>
+                <Text
+                  style={{
+                    marginLeft: 10,
+                    fontWeight: "600",
+                    color: "darkblue",
+                  }}
+                >
                   Supported Banks
                 </Text>
-                <Text style={{ margin: 10, opacity: 0.5, fontSize: 12 }}>
+                <Text
+                  style={{
+                    margin: 10,
+                    opacity: 0.5,
+                    fontSize: 12,
+                    color: "darkblue",
+                  }}
+                >
                   Explore various Banks that support zero balance account
                 </Text>
               </View>
@@ -196,9 +212,9 @@ export default ZeroBalanceAccount;
 
 const styles = StyleSheet.create({
   topCard: {
-    borderRadius: 40,
+    borderRadius: 20,
     resizeMode: "contain",
-    height: 300,
+    height: 350,
 
     padding: 30,
     overflow: "hidden",

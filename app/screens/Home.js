@@ -167,7 +167,7 @@ const Home = () => {
           {display ? (
             <View
               style={{
-                borderColor: "black",
+                borderColor: "#e0e1dd",
                 borderRadius: 20,
                 borderWidth: 2,
                 height: 250,
@@ -182,7 +182,7 @@ const Home = () => {
                 style={{
                   fontSize: 30,
                   fontFamily: "Poppins",
-                  color: "black",
+                  color: "#e0e1dd",
                 }}
               >
                 Add your Financial goals here!

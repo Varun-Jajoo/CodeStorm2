@@ -8,6 +8,7 @@ import {
   Platform,
   Modal,
   TextInput,
+  ScrollView,
 } from "react-native";
 import React, { useEffect, useLayoutEffect, useState, useContext } from "react";
 import { AnimatedCircularProgress } from "react-native-circular-progress";
@@ -15,6 +16,7 @@ import axios from "axios";
 import { useNavigation } from "@react-navigation/native";
 import { Octicons } from "@expo/vector-icons";
 import { UserContext } from "../App";
+import { LinearGradient } from "expo-linear-gradient";
 
 const Expenses = () => {
   const [answer, setAnswer] = useState("");
@@ -23,6 +25,7 @@ const Expenses = () => {
   const navigation = useNavigation();
   const [modalVisible, setModalVisible] = useState(false);
   const [expend, setExpend] = useState(0);
+  const [loading, setLoading] = useState(false);
 
   const options = {
     method: "POST",
@@ -44,6 +47,7 @@ const Expenses = () => {
   }, 0);
 
   const handleQuestionSubmit = async () => {
+    setLoading(true);
     axios
       .request(options)
       .then((response) => {
@@ -53,12 +57,13 @@ const Expenses = () => {
       .catch((error) => {
         console.error(error);
       });
+    setLoading(false);
   };
   const handlesubmit = () => {
     navigation.navigate("Map");
   };
   return (
-    <SafeAreaView style={{ backgroundColor: "white" }}>
+    <SafeAreaView style={{ backgroundColor: "#DFF5FF" }}>
       <View
         style={{
           paddingTop: Platform.OS === "android" ? 30 : 0,
@@ -66,13 +71,11 @@ const Expenses = () => {
           flexDirection: "column",
         }}
       >
-        {/* <Header style={{position:"absolute",top:0,left:0,bottom:0,right:0,zIndex:99}}/> */}
-
-        <View
+        <LinearGradient
+          colors={["#3FA2F6", "#7CF5FF"]}
           style={{
             height: "51%",
             width: "100%",
-            backgroundColor: "#2b6747",
             borderBottomLeftRadius: 40,
             borderBottomRightRadius: 40,
             position: "relative",
@@ -104,7 +107,7 @@ const Expenses = () => {
                   styles.tabButton,
                   {
                     borderBottomWidth: selectedTab ? 2 : 0,
-                    borderBottomColor: "#2b6747",
+                    borderBottomColor: "#5356FF",
                     height: 22,
                   },
                 ]}
@@ -117,7 +120,7 @@ const Expenses = () => {
                   styles.tabButton,
                   {
                     borderBottomWidth: !selectedTab ? 2 : 0,
-                    borderBottomColor: "#2b6747",
+                    borderBottomColor: "#5356FF",
                     height: 22,
                   },
                 ]}
@@ -135,7 +138,7 @@ const Expenses = () => {
                 alignItems: "center",
               }}
             >
-              <Octicons name="graph" size={22} color="#2b6747" />
+              <Octicons name="graph" size={22} color="#5356FF" />
             </View>
           </View>
           <View
@@ -150,7 +153,7 @@ const Expenses = () => {
               rotation={0}
               width={15}
               fill={(userData.level * 100) / 5}
-              tintColor="#F1C93B"
+              tintColor="#5356FF"
               onAnimationComplete={() => console.log("onAnimationComplete")}
               backgroundColor="#f0fcfe"
             />
@@ -159,19 +162,18 @@ const Expenses = () => {
             style={{
               textAlign: "center",
               paddingTop: 20,
-              color: "#F1C93B",
+              color: "black",
               fontSize: 20,
               fontWeight: 700,
             }}
           >
             Keep it up you can do it !!
           </Text>
-        </View>
+        </LinearGradient>
 
         <View
           style={{
             width: "100%",
-            backgroundColor: "white",
             position: "relative",
             top: -40,
             paddingHorizontal: 10,
@@ -184,7 +186,7 @@ const Expenses = () => {
             <View
               style={{
                 height: 110,
-                backgroundColor: "#98bc62",
+                backgroundColor: "#5DEBD7",
                 borderRadius: 15,
                 flexDirection: "column",
                 justifyContent: "space-between",
@@ -238,7 +240,7 @@ const Expenses = () => {
             <View
               style={{
                 height: 110,
-                backgroundColor: "#F1C93B",
+                backgroundColor: "#7BC9FF",
                 borderRadius: 15,
                 flexDirection: "column",
                 justifyContent: "space-between",
@@ -300,7 +302,7 @@ const Expenses = () => {
             paddingVertical: 5,
           }}
         >
-          <Text style={{ fontSize: 20, fontWeight: 600 ,color:"#2b6747"}}>
+          <Text style={{ fontSize: 20, fontWeight: 600, color: "#5356FF" }}>
             Recommendations for you
           </Text>
 
@@ -308,7 +310,7 @@ const Expenses = () => {
             style={{
               paddingHorizontal: 10,
               paddingVertical: 10,
-              backgroundColor: "#2b6747",
+              backgroundColor: "#008DDA",
               justifyContent: "center",
               alignItems: "center",
               borderRadius: 99,
@@ -316,12 +318,20 @@ const Expenses = () => {
             }}
             onPress={handleQuestionSubmit}
           >
-            <Text style={{ color: "white",backgroundColor:"#2b6747" }}>Recommend</Text>
+            <Text style={{ color: "white" }}>
+              {loading ? "Loading..." : "Recommend"}
+            </Text>
           </Pressable>
 
-          <View style={{ padding: 10}}>
-            <Text style={{color:"#2b6747" }}>{answer ? answer.trim() : "Press The Button"}</Text>
-          </View>
+          <ScrollView
+            style={{ padding: 5, maxHeight: 160 }}
+            contentContainerStyle={{ flexGrow: 1 }}
+            showsVerticalScrollIndicator={true}
+          >
+            <Text style={{ color: "#5356FF" }}>
+              {answer ? answer.trim() : "Press The Button"}
+            </Text>
+          </ScrollView>
         </View>
         <Text
           style={{

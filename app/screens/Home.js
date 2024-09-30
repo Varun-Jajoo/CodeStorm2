@@ -18,9 +18,10 @@ import { ModalButton } from "react-native-modals";
 import { ModalTitle } from "react-native-modals";
 import { SlideAnimation } from "react-native-modals";
 import { ModalContent } from "react-native-modals";
+import { LinearGradient } from "expo-linear-gradient";
 
 const Home = () => {
-  const[display,setdisplay]=useState(true)
+  const [display, setdisplay] = useState(true);
   const [goals, setGoals] = useState([]);
   const [newGoalName, setNewGoalName] = useState("");
   const [newGoalAmount, setNewGoalAmount] = useState("");
@@ -107,11 +108,12 @@ const Home = () => {
   );
 
   return (
-    <>
+    <LinearGradient
+      colors={["#3FA2F6", "#7CF5FF"]}
+      style={{ height: screenHeight }}
+    >
       <View
         style={{
-          display: "flex",
-          backgroundColor: "white",
           height: screenHeight,
         }}
       >
@@ -127,18 +129,18 @@ const Home = () => {
             style={{
               height: 350,
               width: "100%",
-              backgroundColor: "#2b6747",
             }}
           />
           <Pressable
             style={styles.savetop}
-            onPress={() => {setModalVisible(!modalVisible) 
-              setdisplay(false)}}
-            
+            onPress={() => {
+              setModalVisible(!modalVisible);
+              setdisplay(false);
+            }}
           >
             <Image
               source={require("../assets/wallet-wallet-svgrepo-com.png")}
-              style={{ height: 70, width: 80, marginRight: 35, marginTop:5 }}
+              style={{ height: 70, width: 80, marginRight: 35, marginTop: 5 }}
             />
             <View
               style={{
@@ -162,15 +164,40 @@ const Home = () => {
               </Text>
             </View>
           </Pressable>
-         {display ? <View style={{borderColor:"lightgrey",borderRadius:20,borderWidth:2,height:250,width:350,marginTop:80,display:"flex",justifyContent:"center",alignItems:"center"}}><Text style={{fontSize:30,fontFamily:"Poppins",color:"lightgrey"}}>Add your Financial goals here!</Text></View>:
-          <FlatList
-            style={{ marginTop: 80 }}
-            data={goals}
-            renderItem={renderGoalCard}
-            keyExtractor={(item, index) => index.toString()}
-            contentContainerStyle={{ paddingBottom: 180 }}
-            showsVerticalScrollIndicator={false}
-          />}
+          {display ? (
+            <View
+              style={{
+                borderColor: "#e0e1dd",
+                borderRadius: 20,
+                borderWidth: 2,
+                height: 250,
+                width: 350,
+                marginTop: 80,
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <Text
+                style={{
+                  fontSize: 30,
+                  fontFamily: "Poppins",
+                  color: "#e0e1dd",
+                }}
+              >
+                Add your Financial goals here!
+              </Text>
+            </View>
+          ) : (
+            <FlatList
+              style={{ marginTop: 80, width: "100%", paddingHorizontal: 10 }}
+              data={goals}
+              renderItem={renderGoalCard}
+              keyExtractor={(item, index) => index.toString()}
+              contentContainerStyle={{ paddingBottom: 180 }}
+              showsVerticalScrollIndicator={false}
+            />
+          )}
         </View>
       </View>
       <BottomModal
@@ -231,7 +258,7 @@ const Home = () => {
           />
         </ModalContent>
       </BottomModal>
-    </>
+    </LinearGradient>
   );
 };
 
@@ -239,7 +266,7 @@ const styles = StyleSheet.create({
   savetop: {
     height: 100,
     width: "90%",
-    backgroundColor: "#98bc62",
+    backgroundColor: "#DFF5FF",
     display: "flex",
     flexDirection: "row",
     justifyContent: "center",
@@ -251,15 +278,13 @@ const styles = StyleSheet.create({
   },
   save1: {
     height: 200,
-    width: 325,
-    backgroundColor: "#F1C93B",
+    width: "100%",
+    backgroundColor: "#ade8f4",
     display: "flex",
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-    marginHorizontal: 10,
     borderRadius: 20,
-    elevation: 10,
     marginBottom: 10,
   },
   textInput: {

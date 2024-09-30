@@ -8,8 +8,8 @@ import {
   Platform,
 } from "react-native";
 import React from "react";
-import * as Progress from "react-native-progress";
 import { useNavigation } from "@react-navigation/native";
+import { LinearGradient } from "expo-linear-gradient";
 
 const Utilize = () => {
   const navigation = useNavigation();
@@ -30,163 +30,84 @@ const Utilize = () => {
   });
 
   return (
-    <ScrollView>
-      <View
-        style={{
-          display: "flex",
-          height: 800,
-          justifyContent: "center",
-          alignItems: "center",
-          gap: 25,
-        }}
-      >
-        <Image
-          source={require("../assets/family-fishing-cuate.png")}
-          style={{ width: 450, height: 300, margin: 10 }}
-        />
+    <LinearGradient colors={["#3FA2F6", "#7CF5FF"]} style={styles.container}>
+      <ScrollView contentContainerStyle={styles.scrollViewContent}>
+        <View style={styles.content}>
+          <Image
+            source={require("../assets/family-fishing-cuate.png")}
+            style={styles.headerImage}
+          />
 
-        <Pressable
-          onPress={() => navigation.navigate("Stock")}
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "center",
-            alignItems: "center",
-            height: "15%",
-            width: "90%",
-            backgroundColor: "#fcdcae",
-            borderRadius: 45,
-            marginTop: 10,
-            // Apply elevationStyle here
-          }}
-        >
-          {/* <Image
-            source={require("../assets/3d-calculator_10473465.png")}
-            style={{ height: 80, width: 80 }}
-          /> */}
-          <View
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <Text
-              style={{
-                fontSize: 20,
-                marginLeft: 20,
-                marginRight: 20,
-                fontFamily: "Poppins",
-                //fontWeight: 200,
-              }}
-            >
-              Stocks
-            </Text>
-            {/* <Progress.Bar
-              borderColor="transparent"
-              unfilledColor="white"
-              color="rgb(59,198,84)"
-              progress={0.3}
-              width={150}
-              height={10}
-              borderRadius={20}
-              style={{ marginTop: 20 }}
-            /> */}
+          <View style={styles.cardsContainer}>
+            {[
+              {
+                title: "Stocks",
+                icon: require("../assets/stock.png"),
+                onPress: () => navigation.navigate("Stock"),
+              },
+              {
+                title: "Fixed Deposit",
+                icon: require("../assets/fixeddeposite.png"),
+              },
+              {
+                title: "Real Estate",
+                icon: require("../assets/real.png"),
+              },
+            ].map((item, index) => (
+              <Pressable
+                key={index}
+                onPress={item.onPress}
+                style={[styles.card, elevationStyle]}
+              >
+                <Image source={item.icon} style={styles.cardIcon} />
+                <Text style={styles.cardTitle}>{item.title}</Text>
+              </Pressable>
+            ))}
           </View>
-        </Pressable>
-        <Pressable
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "center",
-            alignItems: "center",
-            height: "15%",
-            width: "90%",
-            backgroundColor: "#fcdcae",
-            borderRadius: 45,
-            // Apply elevationStyle here
-          }}
-        >
-          {/* <Image
-            source={require("../assets/notification_6206466.png")}
-            style={{ height: 80, width: 80 }}
-          /> */}
-          <View
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <Text
-              style={{
-                color: "black",
-
-                fontSize: 20,
-                marginLeft: 16,
-                textAlign: "left",
-                fontFamily: "Poppins",
-                //fontWeight: 100,
-              }}
-            >
-              Fixed Deposit
-            </Text>
-            {/* <Progress.Bar
-              borderColor="transparent"
-              unfilledColor="white"
-              color="rgb(59,198,84)"
-              progress={0.3}
-              width={150}
-              height={10}
-              borderRadius={20}
-              style={{ marginTop: 20 }}
-            /> */}
-          </View>
-        </Pressable>
-        <Pressable
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "center",
-            alignItems: "center",
-            height: "15%",
-            width: "90%",
-            backgroundColor: "#fcdcae",
-            borderRadius: 45,
-          }}
-        >
-          {/* <Image
-            source={require("../assets/piggy-bank_1511168.png")}
-            style={{ height: 80, width: 80, margin: 8 }}
-          /> */}
-          <View
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <Text
-              style={{
-                color: "black",
-
-                fontSize: 20,
-                fontFamily: "Poppins",
-                //fontWeight: 200,
-              }}
-            >
-              Real Estate
-            </Text>
-          </View>
-        </Pressable>
-      </View>
-    </ScrollView>
+        </View>
+      </ScrollView>
+    </LinearGradient>
   );
 };
 
 export default Utilize;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  scrollViewContent: {
+    flexGrow: 1,
+  },
+  content: {
+    padding: 20,
+    alignItems: "center",
+  },
+  headerImage: {
+    width: "100%",
+    height: 300,
+    resizeMode: "cover",
+    marginBottom: 30,
+  },
+  cardsContainer: {
+    width: "100%",
+  },
+  card: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "rgba(255, 255, 255, 0.9)",
+    borderRadius: 15,
+    padding: 20,
+    marginBottom: 15,
+  },
+  cardIcon: {
+    width: 40,
+    height: 40,
+    marginRight: 20,
+  },
+  cardTitle: {
+    fontSize: 24,
+    fontFamily: "Poppins",
+    color: "#333",
+  },
+});

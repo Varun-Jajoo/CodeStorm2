@@ -11,6 +11,7 @@ import React, { useState, useContext } from "react";
 import { printToFileAsync } from "expo-print";
 import { shareAsync } from "expo-sharing";
 import { UserContext } from "../App";
+import { LinearGradient } from "expo-linear-gradient";
 
 const Document = () => {
   const { userData, setUserData } = useContext(UserContext);
@@ -2798,43 +2799,51 @@ const Document = () => {
     await shareAsync(file.uri);
   };
   return (
-    <SafeAreaView style={{ alignItems: "center", justifyContent: "center" }}>
-      <Text style={{ paddingVertical: 30, fontSize: 23, fontWeight: 600 }}>
-        Enter Your details for form generation
-      </Text>
-      <TextInput
-        value={father}
-        style={styles.input}
-        placeholder="Enter your father name"
-        onChangeText={(text) => setFather(text)}
-      />
-      <TextInput
-        value={occupation}
-        style={styles.input}
-        placeholder="Enter your occupation"
-        onChangeText={(text) => setOccupation(text)}
-      />
-      <TextInput
-        value={addr}
-        style={styles.input}
-        placeholder="Enter your address"
-        onChangeText={(text) => setAddre(text)}
-      />
-
-      <Pressable
+    <LinearGradient colors={["#3FA2F6", "#7CF5FF"]} style={styles.container}>
+      <SafeAreaView
         style={{
-          backgroundColor: "black",
-          width: 200,
-          height: 50,
           alignItems: "center",
           justifyContent: "center",
-          borderRadius: 30,
+          marginTop: 30,
         }}
-        onPress={generatePdf}
       >
-        <Text style={{ color: "white" }}>Document</Text>
-      </Pressable>
-    </SafeAreaView>
+        <Text style={{ paddingVertical: 30, fontSize: 23, fontWeight: 600 }}>
+          Enter Your details for form generation
+        </Text>
+        <TextInput
+          value={father}
+          style={styles.input}
+          placeholder="Enter your father name"
+          onChangeText={(text) => setFather(text)}
+        />
+        <TextInput
+          value={occupation}
+          style={styles.input}
+          placeholder="Enter your occupation"
+          onChangeText={(text) => setOccupation(text)}
+        />
+        <TextInput
+          value={addr}
+          style={styles.input}
+          placeholder="Enter your address"
+          onChangeText={(text) => setAddre(text)}
+        />
+
+        <Pressable
+          style={{
+            backgroundColor: "black",
+            width: 200,
+            height: 50,
+            alignItems: "center",
+            justifyContent: "center",
+            borderRadius: 30,
+          }}
+          onPress={generatePdf}
+        >
+          <Text style={{ color: "white" }}>Document</Text>
+        </Pressable>
+      </SafeAreaView>
+    </LinearGradient>
   );
 };
 
@@ -2864,5 +2873,9 @@ const styles = StyleSheet.create({
         elevation: 2,
       },
     }),
+  },
+  container: {
+    flex: 1,
+    paddingTop: Platform.OS === "android" ? 25 : 0,
   },
 });

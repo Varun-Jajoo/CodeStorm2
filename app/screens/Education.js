@@ -31,12 +31,15 @@ const Education = () => {
       <View style={styles.bottomup}></View>
       <View style={styles.content}>
         <View style={styles.statsContainer}>
-          <Pressable style={[styles.statBox, styles.elevationStyle]}>
+          <Pressable
+            onPress={() => navigation.navigate("ChatBot")}
+            style={[styles.statBox, styles.elevationStyle]}
+          >
             <Image
-              source={require("../assets/rank-svgrepo-com.png")}
+              source={require("../assets/chatbot.png")}
               style={styles.statIcon}
             />
-            <Text style={styles.statText}>Rank</Text>
+            <Text style={styles.statText}>Chatbot</Text>
           </Pressable>
           <Pressable
             onPress={() => navigation.navigate("Utilize")}

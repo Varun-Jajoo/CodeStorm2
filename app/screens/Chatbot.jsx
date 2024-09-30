@@ -84,7 +84,7 @@ export default function App() {
               marginTop: 200,
             }}
           >
-            Welcome to the chatbot
+            Welcome to the BachatBot
           </Text>
         )}
       </ScrollView>

@@ -284,7 +284,7 @@ const styles = StyleSheet.create({
   save1: {
     height: 200,
     width: "100%",
-    backgroundColor: "#ade8f4",
+    backgroundColor: "#4cc9f0",
     display: "flex",
     flexDirection: "row",
     justifyContent: "center",

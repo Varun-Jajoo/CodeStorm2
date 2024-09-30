@@ -8,6 +8,7 @@ import {
   Modal,
   ScrollView,
   Animated,
+  Dimensions,
 } from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
 
@@ -357,7 +358,8 @@ const styles = StyleSheet.create({
   container: {
     marginTop: 30,
     flex: 1,
-    backgroundColor: "#f3f4f6",
+    height: "100%",
+    backgroundColor: "#caf0f8",
     padding: 16,
   },
   balanceCard: {

@@ -294,7 +294,7 @@ const Expenses = () => {
           style={{
             marginHorizontal: 10,
             height: 250,
-            backgroundColor: "#F1F1F1",
+            backgroundColor: "#bbd0ff",
             borderRadius: 20,
             paddingHorizontal: 10,
             marginTop: -20,

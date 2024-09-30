@@ -75,7 +75,7 @@ const SavingsAccount = () => {
                 onPress={() => navigation.navigate("BankPage")}
                 style={{
                   backgroundColor: "#0096c7",
-                  height: 150,
+                  height: 170,
                   width: 170,
                   borderRadius: 20,
                 }}
@@ -89,6 +89,7 @@ const SavingsAccount = () => {
                     color: "darkblue",
                     marginLeft: 10,
                     fontWeight: "600",
+                    marginTop: 10,
                   }}
                 >
                   Savings Bank Account
@@ -108,7 +109,7 @@ const SavingsAccount = () => {
                 onPress={() => navigation.navigate("Scheme")}
                 style={{
                   backgroundColor: "#48cae4", // Pastel yellow
-                  height: 150,
+                  height: 170,
                   width: 170,
                   borderRadius: 20,
                 }}
@@ -118,7 +119,7 @@ const SavingsAccount = () => {
                   style={{ width: 40, height: 40, margin: 10 }}
                 />
                 <Text
-                  style={{ color: "brown", marginLeft: 10, fontWeight: "600" }}
+                  style={{ color: "brown", marginLeft: 10, fontWeight: "600" , marginTop: 10,}}
                 >
                   Online Application
                 </Text>
@@ -128,6 +129,7 @@ const SavingsAccount = () => {
                     margin: 10,
                     opacity: 0.5,
                     fontSize: 12,
+                    
                   }}
                 >
                   Online application for Account Opening
@@ -137,7 +139,7 @@ const SavingsAccount = () => {
                 onPress={() => navigation.navigate("Savings")}
                 style={{
                   backgroundColor: "#70d6ff", // Pastel green
-                  height: 150,
+                  height: 170,
                   width: 170,
                   borderRadius: 20,
                 }}
@@ -151,6 +153,7 @@ const SavingsAccount = () => {
                     color: "darkgreen",
                     marginLeft: 10,
                     fontWeight: "600",
+                    marginTop: 10,
                   }}
                 >
                   Mobile Banking
@@ -161,6 +164,7 @@ const SavingsAccount = () => {
                     margin: 10,
                     opacity: 0.5,
                     fontSize: 12,
+                    
                   }}
                 >
                   Access mobile banking services with your account
@@ -169,7 +173,7 @@ const SavingsAccount = () => {
               <View
                 style={{
                   backgroundColor: "#AFEEEE", // Pastel blue
-                  height: 150,
+                  height: 170,
                   width: 170,
                   borderRadius: 20,
                 }}
@@ -178,7 +182,7 @@ const SavingsAccount = () => {
                   source={require("../assets/bank.png")}
                   style={{ width: 40, height: 40, margin: 10 }}
                 />
-                <Text style={{ marginLeft: 10, fontWeight: "600" }}>
+                <Text style={{ marginLeft: 10, fontWeight: "600",  marginTop: 10, }}>
                   Account Services
                 </Text>
                 <Text style={{ margin: 10, opacity: 0.5, fontSize: 12 }}>

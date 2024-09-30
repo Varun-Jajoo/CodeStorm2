@@ -79,6 +79,7 @@ const ZeroBalanceAccount = () => {
                   backgroundColor: "#4cc9f0", // Light blue
                   height: 200,
                   width: 170,
+                  
                   borderRadius: 20,
                 }}
               >

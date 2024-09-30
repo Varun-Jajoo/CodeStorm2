@@ -1,0 +1,198 @@
+*{
+    font-family: 'Poppins', sans-serif;
+}
+.top{
+    display: flex;
+    justify-content: space-between;
+}
+.trophy{
+   position: relative;
+    height: 100px;
+    width: 300px;
+    background-color: white;
+    border-radius: 0 50px 50px 0 ;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.graph{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    height: 100px;
+    width: 300px;
+    background-color: white;
+    border-radius: 50px 0 0px  50px ;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+    margin-top: 30px;
+}
+.level{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.status{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.card{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100px;
+    width: 30vw;
+    margin: 30px 0 0 0;
+    outline: none;
+    border: none;
+    box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px;
+
+}
+#rank{
+    border: 2px solid rgb(15, 37, 145);
+    background-color: #d5ecf9;
+    
+}
+#points{
+    border: 2px solid rgb(120, 21, 120);
+    background-color: #ffcffa;
+}
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 32px;
+}
+.text{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-left: 60px;
+}
+.card1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 0 0 calc(45% - 20px);
+    height: 200px;
+    border-radius: 30px;
+    color: white;
+    cursor: pointer;
+    transition: transform 400ms, filter 400ms;
+    box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px;
+    
+}
+
+.tip {
+    font-size: 2em;
+    font-weight: 900;
+    margin: 0;
+    padding: 0;
+}
+
+.card1 .second-text {
+    font-size: 1.3em;
+    margin-bottom: 20px;
+}
+
+.card1:hover {
+    transform: scale(1.1);
+}
+
+.cards:hover > .card1:not(:hover) {
+    filter: blur(2px);
+    transform: scale(0.9);
+}
+
+/* Add your background colors for the red, blue, and green cards as needed */
+.red {
+    background: rgb(192,104,233);
+    background: radial-gradient(circle, rgba(192,104,233,1) 0%, rgba(106,81,229,1) 100%);
+}
+
+.blue {
+    background: rgb(104,157,233);
+background: radial-gradient(circle, rgba(104,157,233,1) 0%, #457fe5 100%);
+}
+
+.orange {
+    background: rgb(233,179,104);
+    background: radial-gradient(circle, rgba(233,179,104,1) 0%, rgba(210,65,65,1) 100%);
+}
+.green{
+    background: rgb(59,198,84);
+background: radial-gradient(circle, rgba(59,198,84,1) 0%, rgba(29,121,33,1) 100%);
+}
+.courses{
+    margin: 40px 0 0 0;
+}
+progress{
+    border-radius: 10px ;
+    margin-top: 14px;
+}
+progress::-webkit-progress-value{
+    background-color: #31cd63;
+    border-radius: 10px ;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+
+}
+progress::-webkit-progress-bar{
+    border-radius: 10px ;
+    background-color: #fff;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+
+}
+.topcard{
+    display: flex;
+    flex-direction: column;
+    margin-left: 50px;
+}
+.edu{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+   gap: 25px;
+   margin-top: 30px;
+
+}
+.popup{
+    height: 95vh;
+    width: 70vw;
+    position: absolute;
+    background-color: rgb(243, 228, 201);
+    left: 200px;
+    top: 200px;
+    border: 3px solid rgb(97, 72, 26);
+    border-radius: 30px;
+}
+.popcard{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    width: 200px;
+    background-color: #fff;
+    flex: 0 0 calc(45% - 20px);
+    border-radius: 20px;
+}
+#study{
+    background-color: #d5ecf9;
+    border: 3px solid rgb(15, 37, 145);
+}
+#quiz{
+    background-color: #ffcffa;
+    border: 3px solid rgb(120, 21, 120)
+}
+#walk{
+    background-color: rgb(250, 250, 159);
+    border: 3px solid rgb(166, 112, 31);
+}
+#video{
+    background-color: rgb(182, 255, 182);
+    border: 3px solid rgb(19, 66, 22);
+}

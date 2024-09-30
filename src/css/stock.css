@@ -1,0 +1,19 @@
+.stock-container{
+    width: 100%;
+    height: 100vh;
+    /* background-color: black; */
+    color: rgb(149, 255, 110);
+}
+.charts{
+  
+    height: 90vh;
+    width: 70%;
+}
+.stocks{
+    height:"90vh";
+    width: 100%;
+    background-color: grey;
+}
+.stock-body{
+    display: flex;
+}

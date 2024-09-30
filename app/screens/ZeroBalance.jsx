@@ -79,6 +79,7 @@ const ZeroBalanceAccount = () => {
                   backgroundColor: "#4cc9f0", // Light blue
                   height: 200,
                   width: 170,
+
                   borderRadius: 20,
                 }}
               >
@@ -228,7 +229,7 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(0, 0, 0, 0.5)", // Adjust opacity as needed
   },
   rockbottom: {
-    height: 450,
+    height: 500,
     display: "flex",
     alignItems: "center",
   },

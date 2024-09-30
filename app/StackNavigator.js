@@ -32,6 +32,7 @@ import ZeroBalanceAccount from "./screens/ZeroBalance";
 import SavingsAccount from "./screens/Savings";
 import BankPage from "./screens/BankPage";
 import CameraScreen from "./components/Camera";
+import ChatBot from "./screens/Chatbot";
 
 const StackNavigator = () => {
   const Tab = createBottomTabNavigator();
@@ -253,6 +254,11 @@ const StackNavigator = () => {
         <Stack.Screen
           name="Zero"
           component={ZeroBalanceAccount}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="ChatBot"
+          component={ChatBot}
           options={{ headerShown: false }}
         />
         <Stack.Screen

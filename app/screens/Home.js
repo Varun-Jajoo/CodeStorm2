@@ -109,7 +109,7 @@ const Home = () => {
 
   return (
     <LinearGradient
-      colors={["#3FA2F6", "#7CF5FF"]}
+      colors={["#3FA2F6", "#ade8f4", "white"]}
       style={{ height: screenHeight }}
     >
       <View
@@ -165,10 +165,15 @@ const Home = () => {
             </View>
           </Pressable>
           {display ? (
-            <View
+            <Pressable
+              onPress={() => {
+                setModalVisible(!modalVisible);
+                setdisplay(false);
+              }}
               style={{
-                borderColor: "#e0e1dd",
+                borderColor: "#0077b6",
                 borderRadius: 20,
+                backgroundColor: "#DFF5FF",
                 borderWidth: 2,
                 height: 250,
                 width: 350,
@@ -182,12 +187,12 @@ const Home = () => {
                 style={{
                   fontSize: 30,
                   fontFamily: "Poppins",
-                  color: "#e0e1dd",
+                  color: "#0077b6",
                 }}
               >
                 Add your Financial goals here!
               </Text>
-            </View>
+            </Pressable>
           ) : (
             <FlatList
               style={{ marginTop: 80, width: "100%", paddingHorizontal: 10 }}
@@ -279,7 +284,7 @@ const styles = StyleSheet.create({
   save1: {
     height: 200,
     width: "100%",
-    backgroundColor: "#ade8f4",
+    backgroundColor: "#4cc9f0",
     display: "flex",
     flexDirection: "row",
     justifyContent: "center",

@@ -46,7 +46,7 @@ const PersonalFirst = () => {
     },
     {
       title: "Toiletries",
-      img: require("../assets/commodity_2974036.png"),
+      img: require("../assets/toiletries.png"),
       selected: false,
       spent: 0,
     },

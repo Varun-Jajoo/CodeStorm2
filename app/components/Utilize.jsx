@@ -85,8 +85,8 @@ const styles = StyleSheet.create({
   },
   headerImage: {
     width: "100%",
-    height: 300,
-    resizeMode: "cover",
+    height: 350,
+    resizeMode: "contain",
     marginBottom: 30,
   },
   cardsContainer: {
@@ -95,10 +95,10 @@ const styles = StyleSheet.create({
   card: {
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: "rgba(255, 255, 255, 0.9)",
+    backgroundColor: "#edf6f9",
     borderRadius: 15,
     padding: 20,
-    marginBottom: 15,
+    marginBottom: 30,
   },
   cardIcon: {
     width: 40,

@@ -294,7 +294,7 @@ const Expenses = () => {
           style={{
             marginHorizontal: 10,
             height: 250,
-            backgroundColor: "#F1F1F1",
+            backgroundColor: "#bbd0ff",
             borderRadius: 20,
             paddingHorizontal: 10,
             marginTop: -20,
@@ -340,7 +340,7 @@ const Expenses = () => {
             top: Platform.OS === "android" ? 127 : 105,
             right: "45%",
             fontSize: 80,
-            color: "#F1C93B",
+            color: "#5356FF",
             fontWeight: "bold",
           }}
         >

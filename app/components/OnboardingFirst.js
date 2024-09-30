@@ -1,61 +1,78 @@
-import React, { useState,useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { StyleSheet, Text, View, TextInput, Platform } from "react-native";
 import DropDownPicker from "react-native-dropdown-picker";
 import { UserContext } from "../App";
 
+const translations = {
+  english: {
+    namePlaceholder: "Enter your name",
+    agePlaceholder: "Age",
+    phonePlaceholder: "Phone Number",
+    languageLabel: "Select a language",
+  },
+  hindi: {
+    namePlaceholder: "अपना नाम दर्ज करें",
+    agePlaceholder: "उम्र",
+    phonePlaceholder: "फोन नंबर",
+    languageLabel: "भाषा चुनें",
+  },
+  marathi: {
+    namePlaceholder: "तुमचे नाव भरा",
+    agePlaceholder: "वय",
+    phonePlaceholder: "फोन नंबर",
+    languageLabel: "भाषा निवडा",
+  },
+};
 
 const OnboardingFirst = () => {
-  const {userData,setUserData} = useContext(UserContext);
+  const { userData, setUserData } = useContext(UserContext);
   const [open, setOpen] = useState(false);
-  const [value, setValue] = useState(null);
+  const [value, setValue] = useState("english"); // Default to English
   const [items, setItems] = useState([
     { label: "English", value: "english" },
-    { label: "Hindi", value: "hindi" },
-    { label: "Marathi", value: "marathi" },
+    { label: "हिंदी", value: "hindi" }, // Hindi in Hindi script
+    { label: "मराठी", value: "marathi" }, // Marathi in Marathi script
   ]);
   const [name, setName] = useState("");
   const [age, setAge] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
 
-useEffect(()=>{
-  setUserData((prevUserData) => ({
-    ...prevUserData,
-    name,
-  }));
-  setUserData((prevUserData) => ({
-    ...prevUserData,
-    age,
-  }));
-  setUserData((prevUserData) => ({
-    ...prevUserData,
-    phoneNumber,
-  }));
+  const [placeholders, setPlaceholders] = useState(translations[value]); // Initialize with English translations
 
-  setUserData((prevUserData) => ({
-    ...prevUserData,
-    language:value,
-  }))
+  useEffect(() => {
+    setUserData((prevUserData) => ({
+      ...prevUserData,
+      name,
+      age,
+      phoneNumber,
+      language: value,
+    }));
+  }, [name, age, phoneNumber, value]);
 
-},[value])
+  useEffect(() => {
+    // Update the placeholders/text when language changes
+    setPlaceholders(translations[value]);
+  }, [value]);
+
   return (
     <View style={styles.container}>
       <View style={styles.inputContainer}>
         <TextInput
           value={name}
           style={styles.input}
-          placeholder="Enter your name"
+          placeholder={placeholders.namePlaceholder} // Use translated placeholder
           onChangeText={(text) => setName(text)}
         />
         <TextInput
           value={age}
           style={styles.input}
-          placeholder="Age"
+          placeholder={placeholders.agePlaceholder} // Use translated placeholder
           onChangeText={(text) => setAge(text)}
         />
         <TextInput
           value={phoneNumber}
           style={styles.input}
-          placeholder="Phone Number"
+          placeholder={placeholders.phonePlaceholder} // Use translated placeholder
           onChangeText={(text) => setPhoneNumber(text)}
         />
       </View>
@@ -73,11 +90,10 @@ useEffect(()=>{
           labelStyle={styles.dropDownLabel}
           containerStyle={styles.dropDownContainer}
           translation={{
-            PLACEHOLDER: "Select a language",
+            PLACEHOLDER: placeholders.languageLabel, // Update dropdown label based on language
           }}
           placeholderStyle={{
             color: "lightgrey",
-            //fontWeight: 600,
           }}
           dropDownDirection="BOTTOM"
           dropDownContainerStyle={{
@@ -128,7 +144,6 @@ const styles = StyleSheet.create({
     width: 300,
     borderColor: "lightgray",
     marginTop: 10,
-
     ...Platform.select({
       ios: {
         shadowColor: "#000",

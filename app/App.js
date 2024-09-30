@@ -23,7 +23,7 @@ export default function App() {
     salary: "7000",
     savings: "600",
     city: "Rural",
-    form: false,
+    form: true,
     leftToSpend: 0,
     points: 1000,
     level: "1",

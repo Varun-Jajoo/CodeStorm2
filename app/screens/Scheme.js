@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import {
   StyleSheet,
   Text,
@@ -5,8 +6,10 @@ import {
   SafeAreaView,
   Pressable,
   ScrollView,
+  Image,
+  Platform,
 } from "react-native";
-import React, { useState } from "react";
+import { LinearGradient } from "expo-linear-gradient";
 import CheckBox from "../components/CheckBox";
 import axios from "axios";
 import { useNavigation } from "@react-navigation/native";
@@ -28,6 +31,7 @@ const Scheme = () => {
   const [bp, setBp] = useState(false);
   const [clicked, setClicked] = useState(false);
   const [schemes, setSchemes] = useState([]);
+  const [loading, setLoading] = useState(false);
   const navigation = useNavigation();
   const prompt =
     "generate schemes that as an Indian citizen having" +
@@ -56,131 +60,180 @@ const Scheme = () => {
 
   const handlePress = async () => {
     try {
+      setLoading(true);
       const response = await axios.request(options);
       const schemeList = response.data.openai.generated_text
         .split("\n")
         .filter((scheme) => scheme.trim() !== "");
       setSchemes(schemeList);
       setClicked(true);
+      setLoading(false);
     } catch (error) {
       console.error(error);
     }
   };
 
   return (
-    <SafeAreaView style={{}}>
-      {!clicked ? (
-        <View style={{display:"flex",alignItems:"center",justifyContent:"center"}}>
-          <Text
-            style={{
-              paddingHorizontal: 20,
-              paddingTop: 20,
-              fontSize: 25,
-              fontWeight: 600,
-            }}
-          >
-            Check whether you are eligible for government schemes
-          </Text>
-          <View style={{ padding: 15, alignItems: "center" }}>
-            <CheckBox
-              title="Do you have aadhar card ?"
-              onPress={() => setAadhar(!aadhar)}
-              isChecked={aadhar}
-            />
-            <CheckBox
-              title="Do you have an income card certificate?"
-              onPress={() => setBpl(!bpl)}
-              isChecked={bpl}
-            />
-            <CheckBox
-              title="Are you a pregnant woman ?"
-              onPress={() => setPreg(!preg)}
-              isChecked={preg}
-            />
-            <CheckBox
-              title="Do you have a business plan ?"
-              onPress={() => setBp(!bp)}
-              isChecked={bp}
-            />
-            <Pressable style={styles.continueButton} onPress={handlePress}>
-              <Text style={styles.continueButtonText}>Continue</Text>
-            </Pressable>
-          </View>
-        </View>
-      ) : (
-        <>
-          <ScrollView
-            contentContainerStyle={{ alignItems: "center" }}
-            style={styles.container}
-          >
-            <Text style={styles.header}>Government Schemes</Text>
-            {schemes.slice(0, 5).map((scheme, index) => (
-              <View
-                key={index}
-                style={[
-                  styles.schemeItemContainer,
-                  { backgroundColor: backgroundColors[index] },
-                ]}
-              >
-                <Text style={styles.boldText}>{scheme.split(":")[0]}:</Text>
-                <Text style={styles.schemeItem}>
-                  {scheme.split(":").slice(1).join(":")}
-                </Text>
-              </View>
-            ))}
-            <Pressable
-              style={styles.continueButton}
-              onPress={() => navigation.navigate("Doc")}
-            >
-              <Text style={styles.continueButtonText}>
-                Press to create a PMJDY
+    <LinearGradient colors={["#3FA2F6", "#7CF5FF"]} style={styles.container}>
+      <SafeAreaView style={styles.safeArea}>
+        <ScrollView contentContainerStyle={styles.scrollViewContent}>
+          <Image
+            source={require("../assets/government.png")}
+            style={styles.headerImage}
+          />
+          {!clicked ? (
+            <View style={styles.content}>
+              <Text style={styles.header}>
+                Check Your Eligibility for Government Schemes
               </Text>
-            </Pressable>
-          </ScrollView>
-        </>
-      )}
-    </SafeAreaView>
+              <View style={styles.checkboxContainer}>
+                <CheckBox
+                  title="Do you have an Aadhar card?"
+                  onPress={() => setAadhar(!aadhar)}
+                  isChecked={aadhar}
+                />
+                <CheckBox
+                  title="Do you have an income certificate?"
+                  onPress={() => setBpl(!bpl)}
+                  isChecked={bpl}
+                />
+                <CheckBox
+                  title="Are you a pregnant woman?"
+                  onPress={() => setPreg(!preg)}
+                  isChecked={preg}
+                />
+                <CheckBox
+                  title="Do you have a business plan?"
+                  onPress={() => setBp(!bp)}
+                  isChecked={bp}
+                />
+              </View>
+              <Pressable style={styles.continueButton} onPress={handlePress}>
+                <Text style={styles.continueButtonText}>
+                  {loading ? "Loading..." : "Continue"}
+                </Text>
+              </Pressable>
+            </View>
+          ) : (
+            <View style={styles.content}>
+              <Text style={styles.header}>Government Schemes</Text>
+              {schemes.slice(0, 5).map((scheme, index) => (
+                <View
+                  key={index}
+                  style={[
+                    styles.schemeItemContainer,
+                    { backgroundColor: backgroundColors[index] },
+                  ]}
+                >
+                  <Text style={styles.boldText}>{scheme.split(":")[0]}:</Text>
+                  <Text style={styles.schemeItem}>
+                    {scheme.split(":").slice(1).join(":")}
+                  </Text>
+                </View>
+              ))}
+              <Pressable
+                style={styles.continueButton}
+                onPress={() => navigation.navigate("Doc")}
+              >
+                <Text style={styles.continueButtonText}>
+                  Press to create a PMJDY
+                </Text>
+              </Pressable>
+            </View>
+          )}
+        </ScrollView>
+      </SafeAreaView>
+    </LinearGradient>
   );
 };
 
 const styles = StyleSheet.create({
-  continueButton: {
-    backgroundColor: "black",
-    width: 350,
-    height: 60,
-    justifyContent: "center",
-    alignItems: "center",
-    borderRadius: 30,
-    marginTop: 30,
-  },
-  continueButtonText: {
-    color: "white",
-    textAlign: "center",
-    fontSize: 25,
-    fontFamily: "Poppins",
-  },
   container: {
-    padding: 16,
+    flex: 1,
+  },
+  safeArea: {
+    flex: 1,
+    paddingTop: Platform.OS === "android" ? 25 : 0,
+  },
+  scrollViewContent: {
+    flexGrow: 1,
+  },
+  headerImage: {
+    width: "100%",
+    height: 250,
+    marginTop: 20,
+    resizeMode: "contain",
+    marginBottom: 20,
+  },
+  content: {
+    padding: 20,
+    alignItems: "center",
   },
   header: {
     fontSize: 24,
     fontWeight: "bold",
-    marginBottom: 16,
+    color: "black",
+    textAlign: "center",
+    marginBottom: 20,
+    fontFamily: "Poppins",
+  },
+  checkboxContainer: {
+    width: "100%",
+    marginBottom: 20,
+  },
+  continueButton: {
+    backgroundColor: "rgba(255, 255, 255, 0.9)",
+    width: "100%",
+    height: 60,
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 30,
+    marginTop: 20,
+    ...Platform.select({
+      ios: {
+        shadowColor: "black",
+        shadowOffset: { width: 0, height: 4 },
+        shadowOpacity: 0.5,
+        shadowRadius: 4,
+      },
+      android: {
+        elevation: 10,
+      },
+    }),
+  },
+  continueButtonText: {
+    color: "#4A00E0",
+    textAlign: "center",
+    fontSize: 20,
+    fontFamily: "Poppins",
+    fontWeight: "bold",
+  },
+  schemeItemContainer: {
+    marginBottom: 15,
+    padding: 15,
+    borderRadius: 15,
+    width: "100%",
+    ...Platform.select({
+      ios: {
+        shadowColor: "black",
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.3,
+        shadowRadius: 2,
+      },
+      android: {
+        elevation: 5,
+      },
+    }),
+  },
+  boldText: {
+    fontSize: 18,
+    fontWeight: "bold",
+    marginBottom: 5,
+    fontFamily: "Poppins",
   },
   schemeItem: {
     fontSize: 16,
-    marginBottom: 8,
-  },
-  schemeItemContainer: {
-    marginBottom: 8,
-    backgroundColor: "lightblue",
-    padding: 10,
-    borderRadius: 20,
-    marginVertical: 5,
-  },
-  boldText: {
-    fontSize: 16,
-    fontWeight: "bold",
+    fontFamily: "Poppins",
   },
 });
 

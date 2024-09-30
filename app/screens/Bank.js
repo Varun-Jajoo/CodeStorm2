@@ -14,6 +14,7 @@ import Transfer from "../components/Transfer";
 import { UserContext } from "../App";
 import { useNavigation } from "@react-navigation/native";
 import BankOnboarding from "./BankOnboarding";
+import { LinearGradient } from "expo-linear-gradient";
 
 const Bank = () => {
   const [transfer, settransfer] = useState(false);
@@ -23,30 +24,34 @@ const Bank = () => {
     <>
       {userData.bankForm ? (
         <ScrollView bounces={false} style={{ display: "flex" }}>
-          <TouchableOpacity
-            style={styles.wallet}
-            onPress={() => {
-              settransfer(false);
-            }}
+          <LinearGradient
+            colors={["#3FA2F6", "#7CF5FF"]}
+            style={{ height: 350, width: "100%" }}
           >
-            <CreditCard />
-          </TouchableOpacity>
-          <Pressable style={styles.bottomup}></Pressable>
+            <TouchableOpacity
+              style={styles.wallet}
+              onPress={() => {
+                settransfer(false);
+              }}
+            >
+              <CreditCard />
+            </TouchableOpacity>
+          </LinearGradient>
+          <View style={styles.bottomup}></View>
           <View style={styles.rockbottom}>
             <View
               style={{
                 display: "flex",
                 flexWrap: "wrap",
                 gap: 10,
-                marginTop: 0,
                 alignItems: "center",
-                justifyContent: "center",
+                justifyContent: "start",
               }}
             >
               <Pressable
                 onPress={() => navigation.navigate("Zero")}
                 style={{
-                  backgroundColor: "#ecf2fc",
+                  backgroundColor: "#bde0fe",
                   height: 200,
                   width: 170,
                   borderRadius: 20,
@@ -75,7 +80,7 @@ const Bank = () => {
               <Pressable
                 onPress={() => navigation.navigate("Scheme")}
                 style={{
-                  backgroundColor: "#fcdcae",
+                  backgroundColor: "#a2d2ff",
                   height: 200,
                   width: 170,
                   borderRadius: 20,
@@ -86,13 +91,13 @@ const Bank = () => {
                   style={{ width: 40, height: 40, margin: 10 }}
                 />
                 <Text
-                  style={{ color: "brown", marginLeft: 10, fontWeight: 600 }}
+                  style={{ color: "#0096c7", marginLeft: 10, fontWeight: 600 }}
                 >
                   Schema Doc Generation
                 </Text>
                 <Text
                   style={{
-                    color: "brown",
+                    color: "#023e8a",
                     margin: 10,
                     opacity: 0.5,
                     fontSize: 12,
@@ -104,7 +109,7 @@ const Bank = () => {
               <Pressable
                 onPress={() => navigation.navigate("Savings")}
                 style={{
-                  backgroundColor: "#ddffdf",
+                  backgroundColor: "#ade8f4",
                   height: 200,
                   width: 170,
                   borderRadius: 20,
@@ -116,7 +121,7 @@ const Bank = () => {
                 />
                 <Text
                   style={{
-                    color: "darkgreen",
+                    color: "#2a9d8f",
                     marginLeft: 10,
                     fontWeight: 600,
                   }}
@@ -125,7 +130,7 @@ const Bank = () => {
                 </Text>
                 <Text
                   style={{
-                    color: "darkgreen",
+                    color: "#2a9d8f",
                     margin: 10,
                     opacity: 0.5,
                     fontSize: 12,
@@ -136,7 +141,7 @@ const Bank = () => {
               </Pressable>
               <View
                 style={{
-                  backgroundColor: "#ddeded",
+                  backgroundColor: "#70d6ff",
                   height: 200,
                   width: 170,
                   borderRadius: 20,
@@ -167,7 +172,6 @@ export default Bank;
 
 const styles = StyleSheet.create({
   wallet: {
-    backgroundColor: "#2b6747",
     height: 350,
     paddingBottom: 30,
     width: "100%",
@@ -183,13 +187,15 @@ const styles = StyleSheet.create({
     top: 300,
     height: 50,
     width: "100%",
-    backgroundColor: "white",
+    backgroundColor: "#EEF7FF",
   },
   rockbottom: {
     zIndex: 99,
     height: 450,
-    backgroundColor: "white",
+    backgroundColor: "#EEF7FF",
     display: "flex",
     alignItems: "center",
+    paddingTop: 20,
+    justifyContent: "start",
   },
 });

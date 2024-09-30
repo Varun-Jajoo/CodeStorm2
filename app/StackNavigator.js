@@ -49,7 +49,7 @@ const StackNavigator = () => {
           width: 70,
           height: 70,
           borderRadius: 35,
-          backgroundColor: "#e32f45",
+          backgroundColor: "#e63946",
         }}
       >
         {children}
@@ -70,7 +70,7 @@ const StackNavigator = () => {
             elevation: 0,
             backgroundColor: "white",
             borderRadius: 15,
-            height: 90,
+            height: 70,
           },
         }}
       >
@@ -85,7 +85,6 @@ const StackNavigator = () => {
                 style={{
                   alignItems: "center",
                   justifyContent: "center",
-                  top: 10,
                 }}
               >
                 <Image
@@ -121,7 +120,6 @@ const StackNavigator = () => {
                 style={{
                   alignItems: "center",
                   justifyContent: "center",
-                  top: 10,
                 }}
               >
                 <Image
@@ -180,7 +178,6 @@ const StackNavigator = () => {
                 style={{
                   alignItems: "center",
                   justifyContent: "center",
-                  top: 10,
                 }}
               >
                 <Image
@@ -216,7 +213,6 @@ const StackNavigator = () => {
                 style={{
                   alignItems: "center",
                   justifyContent: "center",
-                  top: 10,
                 }}
               >
                 <Image

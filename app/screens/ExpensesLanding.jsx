@@ -191,6 +191,7 @@ Details to extract:
             paddingTop: Platform.OS === "android" ? 30 : 0,
             height: "100%",
             flexDirection: "column",
+            paddingBottom: 50,
           }}
         >
           <LinearGradient
@@ -597,7 +598,7 @@ const styles = StyleSheet.create({
   buttonText: {
     color: "white",
     textAlign: "center",
-    fontSize: 19 
+    fontSize: 19,
   },
   scrollContainer: {
     flex: 1,

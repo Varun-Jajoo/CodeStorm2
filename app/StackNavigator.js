@@ -172,7 +172,7 @@ const StackNavigator = () => {
         />
         <Tab.Screen
           name="Community"
-          component={CameraScreen}
+          component={Community}
           options={{
             tabBarLabel: "Community",
             headerShown: false,

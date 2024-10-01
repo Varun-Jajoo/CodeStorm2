@@ -3,6 +3,7 @@ import { StyleSheet, Text, View } from "react-native";
 import StackNavigator from "./StackNavigator";
 import { useFonts } from "expo-font";
 import { ModalPortal } from "react-native-modals";
+import WebSocketComponent from "./components/Websocket";
 
 export const UserContext = createContext();
 
@@ -50,6 +51,7 @@ export default function App() {
 
   return (
     <UserContext.Provider value={{ userData, setUserData }}>
+      <WebSocketComponent/>
       <StackNavigator />
       <ModalPortal />
     </UserContext.Provider>

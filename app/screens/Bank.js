@@ -139,7 +139,8 @@ const Bank = () => {
                   Open a Savings Account online
                 </Text>
               </Pressable>
-              <View
+              <Pressable
+                onPress={() => navigation.navigate("Loan")}
                 style={{
                   backgroundColor: "#70d6ff",
                   height: 200,
@@ -152,12 +153,12 @@ const Bank = () => {
                   style={{ width: 40, height: 40, margin: 10 }}
                 />
                 <Text style={{ marginLeft: 10, fontWeight: 600 }}>
-                  Account Tracker
+                  Loan Calculator
                 </Text>
                 <Text style={{ margin: 10, opacity: 0.5, fontSize: 12 }}>
-                  Track your Due and Paid Bills
+                  Calculate your loan EMI
                 </Text>
-              </View>
+              </Pressable>
             </View>
           </View>
         </ScrollView>

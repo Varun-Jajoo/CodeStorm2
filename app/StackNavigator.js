@@ -33,6 +33,7 @@ import SavingsAccount from "./screens/Savings";
 import BankPage from "./screens/BankPage";
 import CameraScreen from "./components/Camera";
 import ChatBot from "./screens/Chatbot";
+import Loan from "./screens/Loan";
 
 const StackNavigator = () => {
   const Tab = createBottomTabNavigator();
@@ -172,7 +173,7 @@ const StackNavigator = () => {
         <Tab.Screen
           name="Community"
           component={CameraScreen}
-          options={{ 
+          options={{
             tabBarLabel: "Community",
             headerShown: false,
             tabBarIcon: ({ focused }) => (
@@ -259,6 +260,11 @@ const StackNavigator = () => {
         <Stack.Screen
           name="ChatBot"
           component={ChatBot}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Loan"
+          component={Loan}
           options={{ headerShown: false }}
         />
         <Stack.Screen

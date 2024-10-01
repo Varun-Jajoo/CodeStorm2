@@ -59,11 +59,10 @@ const DailyExpense = () => {
     },
     data: {
       providers: "openai",
-      text: 
-         `give recommendation if i am 50-60 yrs old and i drink 1 liter of water and sleep 6 hrs and mood is happy in points of 1-2 lines`,
-       
+      text: `give recommendation if i am 50-60 yrs old and i drink 1 liter of water and sleep 6 hrs and mood is happy in points of 1-2 lines`,
+
       temperature: 0.3,
-      max_tokens: 50,
+      max_tokens: 250,
     },
   };
 

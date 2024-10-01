@@ -1,12 +1,19 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import React, { useState } from "react";
-import { View, Text, TouchableOpacity, Image, StyleSheet, ScrollView } from "react-native";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  Image,
+  StyleSheet,
+  ScrollView,
+} from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import * as FileSystem from "expo-file-system";
 import * as ImageManipulator from "expo-image-manipulator";
 
 // Initialize Google Generative AI with the API key
-const genAI = new GoogleGenerativeAI("AIzaSyD66npWWEDp8zXmnI2X9FMPQwDQs6A4NIs"); 
+const genAI = new GoogleGenerativeAI("AIzaSyD66npWWEDp8zXmnI2X9FMPQwDQs6A4NIs");
 
 // Function to convert the image to base64 format for Gemini
 async function fileToGenerativePart(base64Data, mimeType) {
@@ -29,6 +36,15 @@ export default function CameraScreen() {
     "image/heic",
     "image/heif",
   ];
+
+  const photos = {
+    FOOD: require("../assets/FOOD.png"),
+    CLOTHES: require("../assets/CLOTHES.png"),
+    TECHNOLOGY: require("../assets/TECHNOLOGY.png"),
+    EDUCATION: require("../assets/EDUCATION.png"),
+    TRANSPORT: require("../assets/TRANSPORT.png"),
+    
+  };
 
   const openCamera = async () => {
     try {
@@ -71,7 +87,7 @@ export default function CameraScreen() {
         const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
         const geminiResult = await model.generateContent([
           `You will be provided with images of receipts. Your task is to categorize each receipt according to the type of items and the total amount spent in each category. Please ensure that you extract the relevant details and format them in the specific JSON structure provided below.
-CATEGORIES ARE : FOOD, CLOTHES, EDUCATION, TECHNOLOGY, AND TRANSPORT
+CATEGORIES ARE : FOOD, CLOTHES, EDUCATION, TECHNOLOGY, TRANSPORT AND OTHERS
 Details to extract:
 
 [
@@ -99,8 +115,7 @@ Details to extract:
     "category_type": "OTHERS",
     "total_amount_spent": 600
   }
-]
-`,
+]`,
           filePart,
         ]);
 
@@ -130,20 +145,25 @@ Details to extract:
       {geminiResponse && (
         <ScrollView style={styles.scrollContainer}>
           <View style={styles.responseContainer}>
-            {geminiResponse.map((item, index) => (
-              <View key={index} style={styles.responseItem}>
-                {/* <Image
-                  source={require(`../assets/${item.category_type}.png`)}
-                  style={styles.image}
-                /> */}
-                <View style={styles.textContainer}>
-                  <Text style={styles.title}>Category: {item.category_type}</Text>
-                  <Text style={styles.description}>
-                    Total Amount Spent: {item.total_amount_spent}
-                  </Text>
+            {geminiResponse.map((item, index) => {
+              // Use the category_type to get the corresponding image
+              const itemImage =
+                photos[item.category_type] // Fallback to a default image
+
+              return (
+                <View key={index} style={styles.responseItem}>
+                      {item.total_amount_spent !== 0 && <Image source={itemImage} style={styles.image} />}
+                  {item.total_amount_spent !== 0 && (
+                    <View style={styles.textContainer}>
+                      <Text style={styles.title}>{item.category_type}</Text>
+                      <Text style={styles.description}>
+                        Total Amount Spent: {item.total_amount_spent}
+                      </Text>
+                    </View>
+                  )}
                 </View>
-              </View>
-            ))}
+              );
+            })}
           </View>
         </ScrollView>
       )}

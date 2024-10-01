@@ -1,5 +1,11 @@
 import React, { useState, useContext, useEffect } from "react";
-import { StyleSheet, Text, View, TextInput, Platform } from "react-native";
+import {
+  StyleSheet,
+  View,
+  TextInput,
+  Platform,
+  KeyboardAvoidingView,
+} from "react-native";
 import DropDownPicker from "react-native-dropdown-picker";
 import { UserContext } from "../App";
 
@@ -30,8 +36,8 @@ const OnboardingFirst = () => {
   const [value, setValue] = useState("english"); // Default to English
   const [items, setItems] = useState([
     { label: "English", value: "english" },
-    { label: "हिंदी", value: "hindi" }, // Hindi in Hindi script
-    { label: "मराठी", value: "marathi" }, // Marathi in Marathi script
+    { label: "हिंदी", value: "hindi" },
+    { label: "मराठी", value: "marathi" },
   ]);
   const [name, setName] = useState("");
   const [age, setAge] = useState("");
@@ -55,7 +61,11 @@ const OnboardingFirst = () => {
   }, [value]);
 
   return (
-    <View style={styles.container}>
+    <KeyboardAvoidingView
+      style={styles.container}
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      keyboardVerticalOffset={Platform.OS === "ios" ? 64 : 0}
+    >
       <View style={styles.inputContainer}>
         <TextInput
           value={name}
@@ -75,34 +85,23 @@ const OnboardingFirst = () => {
           placeholder={placeholders.phonePlaceholder} // Use translated placeholder
           onChangeText={(text) => setPhoneNumber(text)}
         />
+        <View style={styles.dropDownWrapper}>
+          <DropDownPicker
+            open={open}
+            value={value}
+            items={items}
+            setOpen={setOpen}
+            setValue={setValue}
+            setItems={setItems}
+            style={styles.dropDown}
+            dropDownContainerStyle={styles.dropDownContainer}
+            placeholder={placeholders.languageLabel} // Use translated label
+            placeholderStyle={{ color: "lightgrey" }}
+            labelStyle={styles.dropDownLabel}
+          />
+        </View>
       </View>
-
-      <View style={styles.dropDownContainer}>
-        <DropDownPicker
-          open={open}
-          value={value}
-          items={items}
-          setOpen={setOpen}
-          setValue={setValue}
-          setItems={setItems}
-          style={styles.dropDown}
-          dropDownStyle={styles.dropDown}
-          labelStyle={styles.dropDownLabel}
-          containerStyle={styles.dropDownContainer}
-          translation={{
-            PLACEHOLDER: placeholders.languageLabel, // Update dropdown label based on language
-          }}
-          placeholderStyle={{
-            color: "lightgrey",
-          }}
-          dropDownDirection="BOTTOM"
-          dropDownContainerStyle={{
-            borderColor: "lightgray",
-            borderRadius: 10,
-          }}
-        />
-      </View>
-    </View>
+    </KeyboardAvoidingView>
   );
 };
 
@@ -110,11 +109,13 @@ export default OnboardingFirst;
 
 const styles = StyleSheet.create({
   container: {
-    height: 350,
+    flex: 1,
   },
   inputContainer: {
     width: 300,
     marginTop: 20,
+    justifyContent: "center",
+    alignItems: "center",
   },
   input: {
     width: "100%",
@@ -140,10 +141,13 @@ const styles = StyleSheet.create({
       },
     }),
   },
+  dropDownWrapper: {
+    zIndex: 10, // Ensures dropdown is above other elements
+  },
   dropDownContainer: {
     width: 300,
     borderColor: "lightgray",
-    marginTop: 10,
+    borderRadius: 10,
     ...Platform.select({
       ios: {
         shadowColor: "#000",

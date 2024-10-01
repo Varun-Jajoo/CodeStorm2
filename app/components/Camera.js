@@ -129,17 +129,9 @@ Details to extract:
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Capture Image</Text>
-
-      {image ? (
-        <Image source={{ uri: image }} style={styles.capturedImage} />
-      ) : (
-        <Text>No image captured</Text>
-      )}
-
+    <View style={styles.container}> 
       <TouchableOpacity onPress={openCamera} style={styles.button}>
-        <Text style={styles.buttonText}>Open Camera</Text>
+        <Text style={styles.buttonText}>Upload Image</Text>
       </TouchableOpacity>
 
       {geminiResponse && (
@@ -177,6 +169,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     paddingHorizontal: 20,
+    marginTop: 0,
     paddingTop: 40,
   },
   title: {
